@@ -33,7 +33,7 @@ const pause = async () => {
         {
             type: 'input',
             name: 'enter',
-            message: `\nPresione ${'ENTER'.green} para continuar`
+            message: `Presione ${'ENTER'.green} para continuar`
         }
     ];
 
@@ -53,6 +53,7 @@ const readInput = async (message = '') => {
         }
     ];
 
+    console.log('\n');
     const { answer } = await inquirer.prompt(question);
     return answer;
 }

@@ -1,12 +1,18 @@
 // const { showMenu, pause } = require('./helpers/messages');
 
 const { inquirerMenu, pause, readInput } = require('./helpers/inquirer');
+const { saveTasks, loadTasks } = require('./helpers/saveFile');
 const Tasks = require('./models/tasks');
 
 const main = async () => {
     let opt = '';
 
     const tasks = new Tasks();
+    const fileTasks = loadTasks();
+
+    if (fileTasks) {
+        tasks.createTaskFromArr(fileTasks);
+    }
 
     do {
         opt = await inquirerMenu();
@@ -33,6 +39,8 @@ const main = async () => {
             case '6':
                 break;
         }
+
+        saveTasks(tasks.listTasks);
 
         if (opt !== '0') await pause();
     } while (opt !== '0');

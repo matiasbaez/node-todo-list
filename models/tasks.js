@@ -11,6 +11,10 @@ class Tasks {
         this._list[task.id] = task;
     }
 
+    createTaskFromArr(tasks = []) {
+        tasks.forEach(task => this._list[task.id] = task);
+    }
+
     get listTasks() {
         const list = [];
         Object.keys(this._list).forEach(key => {
