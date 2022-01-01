@@ -24,6 +24,44 @@ class Tasks {
         return list;
     }
 
+    getTasks() {
+        this.listTasks.forEach((task, index) => {
+            const idx = `${index + 1}`.green;
+            const { description, completedAt } = task;
+            const state = completedAt ? 'Completada'.green : 'Pendiente'.red;
+            console.log(`${idx} ${description} :: ${state}`);
+        });
+    }
+
+    getTasksPendingCompleted(completed = true) {
+
+        let index = 0;
+        this.listTasks.forEach(task => {
+            const { description, completedAt } = task;
+            const state = completedAt ? 'Completada'.green : 'Pendiente'.red;
+
+            if (completed) {
+                if (completedAt) {
+                    index++;
+                    console.log(`${(index + '.').green} ${description} :: ${state}`);
+                }
+            } else {
+                if (!completedAt) {
+                    index++;
+                    console.log(`${(index + '.').green} ${description} :: ${state}`);
+                }
+            }
+        });
+
+        if (!this.listTasks.length) console.log('No hay tareas completadas');
+    }
+
+    removeTask(id) {
+        if (this._list[id]) {
+            delete this._list[id];
+        }
+    }
+
 }
 
 module.exports = Tasks;

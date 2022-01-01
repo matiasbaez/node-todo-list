@@ -5,7 +5,7 @@ class Task {
     constructor(description) {
         this.id = uuidv4();
         this.description = description;
-        this.createdAt = null;
+        this.completedAt = null;
     }
 
 }
