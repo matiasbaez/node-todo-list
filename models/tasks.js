@@ -43,7 +43,7 @@ class Tasks {
             if (completed) {
                 if (completedAt) {
                     index++;
-                    console.log(`${(index + '.').green} ${description} :: ${state}`);
+                    console.log(`${(index + '.').green} ${description} :: ${completedAt.green}`);
                 }
             } else {
                 if (!completedAt) {
@@ -54,6 +54,17 @@ class Tasks {
         });
 
         if (!this.listTasks.length) console.log('No hay tareas completadas');
+    }
+
+    toggleCompleted( ids = [] ) {
+        ids.forEach(id => {
+            const task = this._list[id];
+            if (!task.completedAt) task.completedAt = new Date().toDateString();
+        });
+
+        this.listTasks.forEach(task => {
+            if (!ids.includes(task.id)) this._list[task.id].completedAt = null;
+        });
     }
 
     removeTask(id) {
